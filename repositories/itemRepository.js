@@ -8,7 +8,7 @@ class ItemRepository {
         return Item.findById(id);
     }
     async findByName(name) {
-        const query = {'name': name};
+        const query = {'UniqueName': name};
         return Item.findOne(query);
     }
 }

@@ -27,7 +27,11 @@ class ItemController {
             if(req.params.name === undefined || req.params.name.length === 0) {
                 return res.status(400).send({error: 'No name provided'});
             }
-            res.json(await itemService.findByName(req.params.name));
+            const data = await itemService.findByName(req.params.name);
+            if(data.length === 0){
+                return res.status(404).send({error: 'Not found'});
+            }
+            res.json(data)
         } catch (error) {
             console.error(error);
             throw error;

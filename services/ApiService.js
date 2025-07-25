@@ -1,15 +1,25 @@
+const axios = require('axios');
 
-class CompagnieService {
-    async test() {
+class Api {
+    constructor() {
+        this.client = axios.create({
+            baseURL: process.env.VITE_API_URL || 'http://localhost:3000',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            timeout: 10000, // 10 secondes
+        });
+    }
+
+    async get(url) {
         try {
-            let resp = await fetch('https://west.albion-online-data.com/api/v2/stats/prices/T4_BAG,T5_BAG?locations=Caerleon,Bridgewatch&qualities=2')
-            return resp.json();
+            const response = await this.client.get(url);
+            return response.data;
         } catch (error) {
-            console.log(error);
+            console.error('Erreur lors de la requête GET:', error.message);
             throw error;
         }
     }
-
 }
 
-module.exports = new CompagnieService()
+module.exports = new Api();
