@@ -9,8 +9,7 @@ Cette API permet de consulter la base de données des objets d'Albion Online et 
 ### Fonctionnalités principales
 
 - **Consultation d'objets** : Récupération des informations détaillées des objets (noms localisés, descriptions, etc.)
-- **Prix en temps réel** : Intégration avec l'API officielle d'Albion Online pour obtenir les prix actuels
-- **Multi-langues** : Support de 15 langues différentes
+- **Prix en temps réel** : Intégration avec l'API "Albion Data Project" pour obtenir les prix actuels
 - **Recherche flexible** : Recherche par ID MongoDB ou par nom unique d'objet
 
 ## Architecture
@@ -25,17 +24,15 @@ Le projet suit une architecture MVC classique avec :
 
 ## Prérequis
 
-- Node.js (version 14 ou supérieure)
+- Node.js
 - MongoDB
-- Compte MongoDB Atlas ou instance MongoDB locale
-
+- 
 ## Installation
 
 ### 1. Cloner le projet
 
 ```bash
 git clone <url-du-repo>
-cd albionAPI
 ```
 
 ### 2. Installer les dépendances
@@ -50,14 +47,15 @@ Créer un fichier `.env` à la racine du projet :
 
 ```env
 MONGODB_URI=mongodb://localhost:27017/albion
-# ou pour MongoDB Atlas :
-# MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/albion
 
 PORT=3000
 VITE_API_URL=https://www.albion-online-data.com/api/v2/stats/
 ```
 
 ### 4. Base de données
+
+Les données des items sont accessibles ici:
+https://github.com/4880f362-27dc-447d-a9aa-e5d049635f76
 
 Assurez-vous d'avoir une collection `items` dans votre base MongoDB avec la structure suivante :
 
@@ -113,21 +111,27 @@ GET /name/:uniqueName
 **Objet avec prix :**
 ```json
 {
-  "_id": "507f1f77bcf86cd799439011",
-  "LocalizationNameVariable": "@ITEMS_SWORD_NAME",
+  "_id": "6883b691b4bc99f3b87be44e",
+  "LocalizationNameVariable": "@ITEMS_T5_ORE",
+  "LocalizationDescriptionVariable": "@ITEMS_ORE_DESC",
   "LocalizedNames": {
-    "EN-US": "Sword",
-    "FR-FR": "Épée"
+    "EN-US": "Titanium Ore",
+    "DE-DE": "Titanerz"
   },
-  "UniqueName": "T4_SWORD",
+  "LocalizedDescriptions": {
+    "EN-US": "Raw material. Can be refined into metal bars or transmuted into higher-level ore.",
+    "DE-DE": "Rohmaterial. Kann zu Barren verarbeitet oder in Erz höherer Qualität verwandelt werden."
+  },
+  "Index": "967",
+  "UniqueName": "T5_ORE",
   "prices": [
     {
-      "city": "Martlock",
+      "city": "Bridgewatch",
       "quality": 1,
-      "sell_price_min": 1500,
-      "sell_price_min_date": "2024-01-15T10:30:00.000Z",
-      "buy_price_max": 1400,
-      "buy_price_max_date": "2024-01-15T10:25:00.000Z"
+      "sell_price_min": 334,
+      "sell_price_min_date": "2025-07-25T07:20:00",
+      "buy_price_max": 320,
+      "buy_price_max_date": "2025-07-25T07:20:00"
     }
   ]
 }
@@ -164,7 +168,6 @@ albionAPI/
 - **MongoDB** : Base de données NoSQL
 - **Mongoose** : ODM MongoDB pour Node.js
 - **Axios** : Client HTTP pour les appels API
-- **CORS** : Gestion des requêtes cross-origin
 - **dotenv** : Gestion des variables d'environnement
 
 ## Développement
