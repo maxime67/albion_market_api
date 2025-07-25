@@ -1,0 +1,38 @@
+var itemService = require('../services/ItemService')
+
+class ItemController {
+    async findAll(req, res, next){
+        try{
+            res.json(await itemService.findAll());
+        }catch (error){
+            console.log(error);
+            throw error;
+        }
+    }
+
+    async findOne(req, res, next){
+        try{
+            if(req.params.id === undefined){
+                return res.status(400).send('No Id provided');
+            }
+            res.json(await itemService.findOne(req.params.id));
+        } catch (error) {
+            console.error(error);
+            throw error
+        }
+    }
+
+    async findByName(req, res, next){
+        try{
+            if(req.params.name === undefined || req.params.name.length === 0) {
+                return res.status(400).send({error: 'No name provided'});
+            }
+            res.json(await itemService.findByName(req.params.name));
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+}
+
+module.exports = new ItemController()
