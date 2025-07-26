@@ -22,10 +22,13 @@ class CompagnieService {
             return []
         }
         const price = await this.getPrices(item)
+        const priceChart = await this.getChartPrices(item)
+        console.log(price2)
 
         return {
             ...item.toJSON(),
-            prices: price
+            prices: price,
+            chartPrices: priceChart
         }
     }
 
@@ -44,6 +47,12 @@ class CompagnieService {
             })
         })
         return  priceFiltered.filter(i => i.sell_price_min !== 0 && i.buy_price_max !== 0)
+    }
+
+    async getChartPrices(item,locations = ["5003","Martlock","Lymhurst", "Thetford","Bridgewatch","Fort Sterling"]) {
+        const locationsString = locations.join(',')
+
+        return await Api.get(`history/${item.UniqueName}?time-scale=24&locations=${locationsString}`)
     }
 }
 
