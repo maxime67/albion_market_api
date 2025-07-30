@@ -4,13 +4,13 @@ API REST pour récupérer les informations des objets du jeu Albion Online avec 
 
 ## Description
 
-Cette API permet de consulter la base de données des objets d'Albion Online et de récupérer leurs prix actuels sur les différents marchés du jeu. Elle fournit des endpoints pour rechercher des objets par ID, par nom unique, ou lister tous les objets disponibles.
+Cette API permet de consulter la base de données des objets d'Albion Online et de récupérer leurs prix actuels sur les différents marchés du jeu. Elle fournit des endpoints pour rechercher des objets par ID, par nom unique.
 
 ### Fonctionnalités principales
 
 - **Consultation d'objets** : Récupération des informations détaillées des objets (noms localisés, descriptions, etc.)
 - **Prix en temps réel** : Intégration avec l'API "Albion Data Project" pour obtenir les prix actuels
-- **Recherche flexible** : Recherche par ID MongoDB ou par nom unique d'objet
+- **Recherche flexible** : Recherche par nom unique d'objet
 
 ## Architecture
 
@@ -26,7 +26,7 @@ Le projet suit une architecture MVC classique avec :
 
 - Node.js
 - MongoDB
-- 
+
 ## Installation
 
 ### 1. Cloner le projet
@@ -186,7 +186,3 @@ nodemon bin/www
 3. Commit vos changements
 4. Push vers la branche
 5. Ouvrir une Pull Request
-
-## Licence
-
-[Licence à définir]

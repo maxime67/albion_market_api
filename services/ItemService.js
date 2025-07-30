@@ -18,17 +18,28 @@ class CompagnieService {
 
     async findByName(name) {
         const item = await itemRepository.findByName(name)
+
         if(!item) {
             return []
         }
-        const price = await this.getPrices(item)
-        const priceChart = await this.getChartPrices(item)
-        console.log(price2)
+        const prices = await this.getPrices(item)
 
         return {
             ...item.toJSON(),
-            prices: price,
-            chartPrices: priceChart
+            prices: prices,
+        }
+    }
+
+    async findByNameWithTimeData(name) {
+        const item = await itemRepository.findByName(name)
+        if(!item) {
+            return []
+        }
+        const prices = await this.getChartPrices(item)
+
+        return {
+            ...item.toJSON(),
+            prices: prices,
         }
     }
 
