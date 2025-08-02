@@ -1,4 +1,4 @@
-const itemRepository = require('../repositories/ItemRepository');
+const itemRepository = require('../repositories/itemRepository');
 const Api = require('./ApiService')
 
 class CompagnieService {
