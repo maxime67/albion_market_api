@@ -38,7 +38,6 @@ class CompagnieService {
         const prices = await this.getChartPrices(item)
 
         return {
-            ...item.toJSON(),
             prices: prices,
         }
     }
@@ -63,7 +62,8 @@ class CompagnieService {
     async getChartPrices(item,locations = ["5003","Martlock","Lymhurst", "Thetford","Bridgewatch","Fort Sterling"]) {
         const locationsString = locations.join(',')
 
-        return await Api.get(`history/${item.UniqueName}?time-scale=24&locations=${locationsString}`)
+        const data =  await Api.get(`history/${item.UniqueName}?time-scale=24&locations=${locationsString}`)
+        return data
     }
 }
 

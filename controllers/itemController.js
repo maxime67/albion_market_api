@@ -31,6 +31,7 @@ class ItemController {
             if(data.length === 0){
                 return res.status(404).send({error: 'Not found'});
             }
+            data.charts= await itemService.findByNameWithTimeData(req.params.name);
             res.json(data)
         } catch (error) {
             console.error(error);
